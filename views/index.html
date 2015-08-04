@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Дев-сабантуй 23 июля в Месте</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:700,400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="/index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+      <h1>Дев-сабантуй</h1>
+      <article>
+        <div class="schedule">
+          <span class="date">23 июля</span>
+          <span class="time">19:00</span>
+          <span class="location">Место</span>
+        </div>
+        <p class="description">В ближайший четверг, вечером после работы мы соберемся в Месте, чтобы поговорить о разработке, верстке, постпроцессорах, языках программирования и всем остальном. Приходите и приносите свои вопросы и свои рассказы. У нас будет проектор, а у вас — 7 минут на выступление, после чего мы отправимся в ближайший бар ужинать и обсуждать все поднятые темы.</p>
+        {{#if post }}
+        <h2>Спасибо, мы скоро вышлем вам приглашение!</h2>
+        {{else}}
+        <section class="form">
+          <form method="post" action="/">
+            <fieldset>
+              <textarea name="interest" rows="3" placeholder="О чем бы вы хотели рассказать или что бы хотели послушать?"></textarea>
+              <input type='text' name='name' placeholder="Ваше имя"/><br/>
+              <input type='text' name='contact' placeholder="Ваша почта или адрес в соцсети"/><br/>
+              <input type="submit"value="Записаться">
+            </fieldset>
+          </form>`
+        </section>
+        <p>Идея сабантуя вдохновлена <a href="http://bvz.name/fruitclub.html">Фруктовым Клубом</a> Евгения Арутюнова.</p>
+        {{/if}}
+      </article>
+    </div>
+    <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter31527203 = new Ya.Metrika({ id:31527203, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/31527203" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  </body>
+</html>
