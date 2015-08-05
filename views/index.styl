@@ -1,32 +1,79 @@
-/*
-color:
-#446455 — green
-#D3DDDC - light
-#FDD262 - yellow
-#C7B19C - creme
-*/
-
-$text-color = #201A02;
-$background-color = #715A38;
-$active-color = #89B151;
-$normal-shadow = 0 2px 5px 0 rgba(0, 0, 0, 0.16),
-                 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-$hover-shadow = 0 5px 11px 0 rgba(0, 0, 0, 0.18),
-                0 4px 15px 0 rgba(0, 0, 0, 0.15);
-
 html,
 body {
-    font: 300 18px/1.4 'Roboto', Helvetica, Arial, sans-serif;
+    font: 300 18px/1.4 'Roboto Condensed', Helvetica, Arial, sans-serif;
     width: 100%;
     height 100%;
     margin: 0;
     padding: 0;
     color: #333;
-    background-color: $background-color;
+}
+
+.background {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/keynote-christopher-chedeau.jpg') center 35%;
+    filter: blur(3px) opacity(20%);
+}
+
+.page {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    overflow-x: hidden;
+    border-radius: 2px;
+}
+
+.title {
+    sup {
+        font-size: 16px;
+        position: relative;
+        top: -18px;
+        left: 8px;
+        padding: 6px 12px;
+        text-transform: uppercase;
+        color: #fee;
+        background-color: #d00;
+        white-space: nowrap;
+    }
+}
+
+.schedule {
+    font-weight: 400;
+    margin: 4px auto 1rem;
+    margin: 1.2rem 0;
+    text-transform: uppercase;
+}
+
+.content {
+    display: flex;
+    
+    @media (max-width: 860px) {
+        flex-direction: column;
+    }
+}
+
+.enroll {
+    width: 400px;
+    padding-left: 3em;
+    
+    @media (max-width: 860px) {
+        padding: 0;
+        width: auto;
+    }
+}
+
+.form {
+    width: 400px;
 }
 
 h1 {
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     line-height: 110%;
     margin: 2.1rem 0 1.68rem 0;
     font-weight: 300;
@@ -39,57 +86,6 @@ h2 {
 
 p {
     margin: 1rem 0;
-}
-
-.page {
-    box-sizing: border-box;
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 750px;
-    margin 3em auto;
-    padding: 1rem 3rem;
-    background-color: #fff;
-    box-shadow: $normal-shadow;
-    border-radius: 2px;
-}
-
-.description {
-    margin-left: 154px;
-    margin-bottom: 1.68rem;
-}
-
-.schedule {
-    float: left;
-    display: inline-block;
-    margin: 4px auto 1rem;
-    padding: 14px 12px 12px;
-    border: 1px solid $text-color;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.date,
-.time,
-.location {
-    font-weight: 400;
-    display: block;
-    line-height: 1.2;
-    
-}
-    
-.date {
-    font-size: 23px;
-    letter-spacing: -0.6px;
-}
-
-.time {
-    font-weight: 700;
-    font-size: 31px;
-    letter-spacing: 3.8px;
-}
-
-.location {
-    font-size: 28px;
 }
 
 form, fieldset {
@@ -120,11 +116,15 @@ input[type=text],
 textarea {
     width: 100%;
     border-width: 0 0 1px 0;
-    border-color: $text-color;
+    border-color: #555;
+    background-color: transparent;
+    
+    &::placeholder {
+        color: #888;
+    }
 
     &:focus {
-        border-color: $active-color;
-        box-shadow: 0 1px 0 0 $active-color;
+        box-shadow: 0 2px 0 0 #555;
     }
 }
 
@@ -141,11 +141,6 @@ input[type=submit] {
     text-transform: uppercase;
     letter-spacing: 0.4px;
     cursor: pointer;
-    box-shadow: $normal-shadow;
-
-    &:hover {
-        box-shadow: $hover-shadow;
-    }
 
     &:active {
         box-shadow: none;
