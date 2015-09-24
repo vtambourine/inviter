@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Нечетный четверг :: Клуб разработчиков</title>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="/styles/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page container">
+      <article>
+        <h1 class="title">Нечетный четверг<sup>5</sup></h1>
+
+        <div class="schedule row">
+          <div class="schedule__date col-sm-6">
+            Четверг 24 сентября в <em>20:00</em>
+          </div>
+          <div class="schedule__place col-sm-6">
+            <em>Буковски</em> Красноармейская 168/99
+          </div>
+        </div>
+
+        <p class="description">
+          <p>В этот четверг, вечером после работы мы соберемся в Буковски, чтобы поговорить о разработке, верстке, языках программирования, базах данных и всем прочем. Приходите и приносите свои вопросы и свои рассказы. У нас не будет проектора и регламента — мы пропускаем все формальности с выступлениями, бронируем столик в ресторане и переходим непосредственно к барной части симпозиума. Учтите — места за столиком ограничены.</p>
+        </p>
+
+        <h3>Участники</h3>
+        <p>
+          Итак, мы бронируем стол на дюжину человек. Для того, чтобы занять место, вам нужно войти в <a href="http://it61.herokuapp.com/">Slack</a> Ростовского IT-сообщества и в комнате <a href="https://it61.slack.com/messages/sabantuy/">#sabantuy</a> ясно произнести "Мартин, я иду!".
+        </p>
+        <section class="guests row">
+          {{#guests}}
+            <div class="guest col-sm-4 col-md-3 {{#if name}}{{else}}hidden-xs{{/if}}">
+              {{#if name}}
+                <div class="guest__image">
+                  <img src="{{image}}" alt="{{name}}" />
+                </div>
+                <div class="guest__name">{{name}}</div>
+              {{else}}
+                <div class="guest__empty"></div>
+              {{/if}}
+            </div>
+          {{/guests}}
+        </section>
+      </article>
+    </div>
+    <script type="text/javascript">
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter31527203 = new Ya.Metrika({ id:31527203, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/31527203" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  </body>
+</html>

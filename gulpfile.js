@@ -1,54 +1,103 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
-var jade = require('gulp-jade');
-var sass = require('gulp-sass');
-var prettify = require('gulp-prettify');
+var $ = require('gulp-load-plugins')();
 var del = require('del');
+var runSequence = require('run-sequence');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
-var browserSync = require('browser-sync').create();
+var AUTOPREFIXER_BROWSERS = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4',
+  'bb >= 10'
+];
 
-gulp.task('templates', function () {
-    gulp.src('./index.html')
-        .pipe(gulp.dest('./build'))
+// Optimize images
+gulp.task('images', function () {
+  return gulp.src('app/images/**/*')
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/images'))
+    .pipe($.size({title: 'images'}));
 });
 
+// Copy all files at the root level (app)
+gulp.task('assets', function () {
+  return gulp.src([
+    'app/*',
+    '!app/views',
+    '!app/server.js'
+  ]).pipe(gulp.dest('dist'))
+    .pipe($.size({title: 'copy'}));
+});
+
+// Copy web fonts to dist
+gulp.task('fonts', function () {
+  return gulp.src(['app/fonts/**'])
+    .pipe(gulp.dest('dist/fonts'))
+    .pipe($.size({title: 'fonts'}));
+});
+
+// Compile and automatically prefix stylesheets
 gulp.task('styles', function () {
-    gulp.src([
-        'styles/index.scss',
-        'node_modules/normalize.css/normalize.css'
-    ])
-        .pipe(sass())
-        .pipe(gulp.dest('./build'));
+  // For best performance, don't add Sass partials to `gulp.src`
+  return gulp.src([
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'app/styles/*.scss',
+    'app/styles/**/*.css',
+    // 'node_modules/normalize.css/normalize.css'
+  ])
+    .pipe($.sourcemaps.init())
+    .pipe($.changed('.tmp/styles', {extension: '.css'}))
+    .pipe($.sass({
+      precision: 10,
+      onError: console.error.bind(console, 'Sass error:')
+    }))
+    .pipe($.autoprefixer({
+        browsers: AUTOPREFIXER_BROWSERS
+    }))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('.tmp/styles'))
+    // Concatenate and minify styles
+    .pipe($.if('*.css', $.csso()))
+    .pipe(gulp.dest('dist/styles'))
+    .pipe($.size({title: 'styles'}));
 });
 
-gulp.task('scripts', function () {
-    gulp.src([
-        'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/jquery/dist/jquery.min.map',
-        'scripts/index.js'
-    ]).pipe(gulp.dest('build'));
+// Clean output directory
+gulp.task('clean', del.bind(null, ['.tmp', 'dist/*', '!dist/.git'], {dot: true}));
+
+// Watch files for changes & reload
+gulp.task('serve', ['styles'], function () {
+  browserSync({
+    notify: false,
+    logPrefix: 'Thursday',
+    // server: ['.tmp', 'app'],
+    proxy: "localhost:3000"
+  });
+
+  gulp.watch(['app/**/*.html'], reload);
+  gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
+  gulp.watch(['app/images/**/*'], reload);
 });
 
-gulp.task('build', ['styles', 'scripts', 'templates']);
-
-gulp.task('sync', ['build'], function () {
-    browserSync.init({
-        files: ['./build/*.*'],
-        server: {
-            baseDir: ['build', './']
-        },
-        open: false,
-        notify: false
-    });
-
-    gulp.watch('index.html', ['templates']);
-    gulp.watch('styles/**/*.scss', ['styles']);
-    gulp.watch('scripts/**/*.js', ['scripts']);
-    gulp.watch('build/index.html').on('change', browserSync.reload);
+// Build and serve the output from the dist build
+gulp.task('serve:dist', ['default'], function () {
+  browserSync({
+    notify: false,
+    logPrefix: 'Thursday',
+    server: 'dist'
+  });
 });
 
-gulp.task('clean', function () {
-    del('build');
+// Build production files, the default task
+gulp.task('default', ['clean'], function (cb) {
+  runSequence('styles', ['images', 'fonts', 'assets'], cb);
 });
-
-gulp.task('default', ['build']);
