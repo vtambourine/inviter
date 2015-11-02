@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "co-redis": "^1.2.2",
     "babel-plugin-transform-async-to-generator": "^6.0.14",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.0.15",
     "babel-plugin-transform-strict-mode": "^6.0.15",
+    "co-redis": "^1.2.2",
     "consolidate": "^0.13.1",
     "express": "^4.13.3",
     "jade": "^1.11.0",
