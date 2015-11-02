@@ -40,15 +40,15 @@ html(lang='ru')
                 | Мартин Фаулер
               .guest-title
                 | Ненастоящий
-            each user, index in users
+            each guest, index in guests
               .guest
                 - var id = "guest-" + (index + 1)
                 label(for="#{id}")
-                input(id=id)(type='checkbox')
-                img.guest-photo(src='#{user.photo}')
+                input(id=id, type='checkbox')
+                img.guest-photo(src='#{guest.photo}')
                 .guest-name
-                  | #{user.name}
+                  | #{guest.name}
                 .guest-title
-                  | #{user.title}
+                  | #{guest.title}
     include metrika.html
         
