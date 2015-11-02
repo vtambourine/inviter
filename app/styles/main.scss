@@ -1,0 +1,109 @@
+$blue: #268BD2;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font: 300 16px/1.44 'Fira Sans', 'Helvetica', sans-serif;
+}
+
+body {
+  color: #586E75;
+  background-color: #FDF6E3
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fira Mono', 'Fira Sans', 'Helvetica', sans-serif;
+  text-align: center;
+  color: #073642;
+}
+
+h3 {
+  margin-top: 2em;
+  font-size: 24px;
+}
+
+a {
+  display: inline-block;
+  color: $blue;
+  text-decoration: none;
+
+  &:after {
+    background-color: $blue;
+    display: block;
+    content: '';
+    height: 1px;
+    width: 0;
+    margin: -2px auto 0;
+
+    transition: width 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
+.page {
+  width: 80%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.slogan {
+  text-align: center;
+}
+
+.guests {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.guest {
+  $photo-size: 80px;
+  $photo-border-width: 2px;
+  $label-size: $photo-size + 2 * $photo-border-width;
+
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 19.5%;
+  min-width: 180px;
+  height: 134px;
+  margin-bottom: 24px;
+  font: 300 12px/1.5 'Fira Mono', 'Fira Sans', 'Helvetica', sans-serif;
+  text-align: center;
+  color: #586E75;
+
+  & > label {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: $label-size;
+    height: $label-size;
+    margin-left: -($label-size / 2);
+    border-radius: $label-size / 2;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  & > input[type=checkbox] {
+    display: none;
+  }
+
+  &-photo {
+    width: $photo-size;
+    height: $photo-size;
+    border-radius: $photo-size / 2;
+    border: $photo-border-width solid #979797;
+    transition: transform 0.3s;
+  }
+
+  & > input[type=checkbox]:checked + &-photo {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+}
