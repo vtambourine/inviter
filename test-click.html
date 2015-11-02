@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  </head>
+  <body>
+    <a id="link" href="http://ya.ru" target="_blank">Hello</a>
+    <script>
+      document.getElementById('link').addEventListener('click', function(e) {
+        var flag = true;
+        var fired = false;
+        var link = e.target.href;
+
+        $.ajax({
+          url: '/',
+          async: false,
+          success: function(data, status) {
+            console.log(status);
+            flag = false;
+            console.log('done!');
+            console.log('open ', link);
+            window.open(link)
+          }
+        })
+
+        console.log('loop done');
+        e.preventDefault();
+
+        console.log(link);
+        // setTimeout(function() {
+        //   window.open(link)
+        // }, 0)
+        //
+      })
+    </script>
+  </body>
+</html>

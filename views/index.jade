@@ -1,0 +1,54 @@
+doctype html
+html(lang='ru')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Нечетный Четверг
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans:400,300&subset=latin,cyrillic')
+    link(rel='stylesheet', href='styles/main.css')
+  body
+    .page
+      header.page-header
+        h1.title Нечетный четверг
+        .slogan Это место для набросов
+      article
+        section
+          p
+            | Каждый второй четверг, вечером после работы мы соберемся в уютном пабе, чтобы поговорить о разработке, верстке, языках программирования и всем остальном, что может быть интересно. У нас нет проектора и регламента — мы пропускаем всеми формальности с докладами и выступлениями, переходя непосредственно к самому главному.
+          p
+            | Приходите и приносите свои вопросы и свои рассказы в четверг, 29 октября в 20:00 в Буковски
+        section
+          header
+            h3 Просто придти?
+          p
+            | Очень просто. Но перед этим вам нужно зайти в 
+            a(href='/') Slack
+            |  Ростовского IT-сообщества и в комнате 
+            a(href='#') #sabantuy
+            |  ясно произнести «Мартин, я иду!».
+        section
+          header
+            h3 Участники
+          .guests
+            .guest
+              label(for='guest-0')
+              input#guest-0(type='checkbox')
+              img.guest-photo(src='images/profile.png')
+              .guest-name
+                | Мартин Фаулер
+              .guest-title
+                | Ненастоящий
+            each user, index in users
+              .guest
+                - var id = "guest-" + (index + 1)
+                label(for="#{id}")
+                input(id=id)(type='checkbox')
+                img.guest-photo(src='#{user.photo}')
+                .guest-name
+                  | #{user.name}
+                .guest-title
+                  | #{user.title}
+    include metrika.html
+        
