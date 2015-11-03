@@ -7,9 +7,11 @@ import del from 'del';
 import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import yaml from 'js-yaml';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
+const cwd = process.cwd();
 
 // Lint JavaScript
 gulp.task('jshint', () =>
@@ -99,6 +101,20 @@ gulp.task('scripts', () =>
       .pipe(gulp.dest('dist/scripts'))
 );
 
+gulp.task('template', () => {
+  const guestsFilename = path.join(cwd, 'fixtures/guests.yml');
+  const guests = yaml.safeLoad(fs.readFileSync(guestsFilename, 'utf8'));
+
+  gulp.src('./views/*.jade')
+    // Compile template to HTML
+    .pipe($.jade({locals: {guests}}))
+    // Minify any HTML
+    .pipe($.minifyHtml())
+    // Output files
+    .pipe($.size({title: 'template', showFiles: true}))
+    .pipe(gulp.dest('dist'));
+});
+
 // Scan your HTML for assets & optimize them
 gulp.task('html', () => {
   const assets = $.useref.assets({searchPath: '{.tmp,app}'});
@@ -130,8 +146,13 @@ gulp.task('html', () => {
 });
 
 // Clean output directory
-gulp.task('clean', cb => del(['.tmp', 'dist/*', '!dist/.git'], {dot: true},
-  cb));
+gulp.task('clean', done =>
+  del(
+    ['.tmp', 'dist/*', '!dist/.git'],
+    {dot: true},
+    done
+  )
+);
 
 // Watch files for changes & reload
 gulp.task('serve', ['scripts', 'styles'], () => {
@@ -165,10 +186,10 @@ gulp.task('serve:dist', ['default'], () =>
 );
 
 // Build production files, the default task
-gulp.task('default', ['clean'], cb =>
+gulp.task('default', ['clean'], done =>
   runSequence(
     'styles',
     ['jshint', 'html', 'scripts', 'images', 'copy'],
-    cb
+    done
   )
 );
