@@ -1,9 +1,6 @@
 - name: Мартин Фаулер
   title: Ненастоящий
-  photo: png
-- name: Вениамин Тамбурин
-  title: vtambourine
-  photo: jpg
+  photo: /images/profile.png
 - name: igoralekseev
   photo: https://avatars.slack-edge.com/2015-07-11/7536829908_bc2dfb83e5aadbe8a148_192.jpg
 - name: adubovskoy

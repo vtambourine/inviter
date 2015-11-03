@@ -167,6 +167,7 @@ gulp.task('serve', ['scripts', 'styles'], () => {
   });
 
   gulp.watch(['app/**/*.html'], reload);
+  gulp.watch(['views/**/*.jade'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js'], ['jshint', 'scripts']);
   gulp.watch(['app/images/**/*'], reload);
@@ -189,7 +190,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], done =>
   runSequence(
     'styles',
-    ['jshint', 'html', 'scripts', 'images', 'copy'],
+    ['jshint', 'template', 'scripts', 'images', 'copy'],
     done
   )
 );
