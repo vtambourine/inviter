@@ -32,14 +32,6 @@ html(lang='ru')
           header
             h3 Участники
           .guests
-            .guest
-              label(for='guest-0')
-              input#guest-0(type='checkbox')
-              img.guest-photo(src='images/profile.png')
-              .guest-name
-                | Мартин Фаулер
-              .guest-title
-                | Ненастоящий
             each guest, index in guests
               .guest
                 - var id = "guest-" + (index + 1)
