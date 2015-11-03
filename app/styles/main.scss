@@ -110,6 +110,7 @@ a {
     border-radius: $photo-size / 2;
     border: $photo-border-width solid #979797;
     transition: transform 0.3s;
+    user-select: none;
   }
 
   & > input[type=checkbox]:checked + &-photo {
