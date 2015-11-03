@@ -52,7 +52,15 @@ a {
   padding: 64px 0;
 }
 
+.title {
+  & > img {
+    width: 360px;
+    height: 40px;
+  }
+}
+
 .slogan {
+  margin-top: -.75em;
   text-align: center;
 }
 
