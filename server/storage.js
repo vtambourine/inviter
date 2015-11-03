@@ -7,10 +7,12 @@ const redis = coRedis(Redis.createClient());
 const GUESTS_SET = 'thursday:guests';
 const IMAGES_HASH = 'thursday:images';
 
+// Return guest names from database
 async function getGuestNames() {
   return await redis.smembers(GUESTS_SET);
 }
 
+// Return guest photos, saved from Slack
 async function getGuestPhotos() {
   return await redis.hgetall(IMAGES_HASH);
 }

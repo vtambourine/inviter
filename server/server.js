@@ -6,6 +6,7 @@ import {getGuests} from './storage';
 const cwd = process.cwd();
 const app = express();
 
+// Set Jade as default template engine
 app.engine('jade', engines.jade);
 app.set('views', path.join(cwd, 'views'));
 app.set('view engine', 'jade');
