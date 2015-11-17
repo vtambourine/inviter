@@ -51,6 +51,11 @@ a {
   }
 }
 
+em {
+  font-style: normal;
+  color: $red;
+}
+
 .page {
   width: 80%;
   max-width: 1024px;
