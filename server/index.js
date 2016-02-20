@@ -1,13 +1,13 @@
-import path from 'path';
+const path = require('path');
 
 // Include Koa server and related tools
-import Koa from 'koa';
-import Router from 'koa-router';
-import views from 'koa-views';
-import serve from 'koa-static';
+const Koa = require('koa');
+const Router = require('koa-router');
+const views = require('koa-views');
+const serve = require('koa-static');
 
 // Require storage accessor
-import {getGuests} from './storage';
+const getGuests = require('./storage').getGuests;
 
 const cwd = process.cwd();
 const app = new Koa();
